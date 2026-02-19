@@ -6,21 +6,15 @@
     <title>Menna & Ashraf ❤️ | Forever</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Marhey&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* ======================
-           1. التنسيقات (CSS)
-           ====================== */
         :root {
-            --primary: #ff0055; /* لون الحب الناري */
+            --primary: #ff0055;
             --dark: #120509;
             --gradient: linear-gradient(135deg, #1a0b12 0%, #000000 100%);
-            --glass: rgba(255, 255, 255, 0.08);
+            --glass: rgba(255,255,255,0.08);
             --gold: #ffd700;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
             font-family: 'Cairo', sans-serif;
             background: var(--dark);
@@ -31,257 +25,148 @@
             overflow-x: hidden;
             padding-bottom: 80px;
         }
-
-        /* تأثير مطر القلوب */
         .heart-rain {
-            position: fixed;
-            top: -10vh;
-            color: var(--primary);
-            z-index: 9999;
+            position: fixed; top: -10vh;
+            color: var(--primary); z-index: 9999;
             animation: fall linear forwards;
+            pointer-events: none;
         }
         @keyframes fall { to { transform: translateY(110vh); } }
 
         /* شاشة الدخول */
         #login-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
             background: #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 1s ease;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 10000; transition: opacity 1s ease;
         }
-
         .login-card {
             background: rgba(255,255,255,0.05);
-            padding: 2rem;
-            border-radius: 20px;
+            padding: 2rem; border-radius: 20px;
             border: 1px solid var(--primary);
-            box-shadow: 0 0 50px rgba(255, 0, 85, 0.3);
+            box-shadow: 0 0 50px rgba(255,0,85,0.3);
             text-align: center;
         }
-
-        input {
-            padding: 12px;
-            border-radius: 25px;
+        input[type="text"], textarea {
+            padding: 12px; border-radius: 25px;
             border: 2px solid #333;
-            text-align: center;
-            font-size: 1.1rem;
-            margin: 15px 0;
-            width: 80%;
-            outline: none;
-            transition: 0.3s;
+            background: rgba(255,255,255,0.07);
+            text-align: center; font-size: 1.1rem;
+            margin: 15px 0; width: 80%; outline: none;
+            transition: 0.3s; color: white;
+            font-family: 'Cairo', sans-serif;
         }
-        input:focus { border-color: var(--primary); transform: scale(1.05); }
-
+        input[type="text"]:focus, textarea:focus {
+            border-color: var(--primary); transform: scale(1.02);
+        }
         .btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            font-family: 'Marhey';
+            background: var(--primary); color: white;
+            border: none; padding: 10px 30px;
+            border-radius: 25px; font-size: 1.1rem;
+            cursor: pointer; font-family: 'Marhey';
             transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(255, 0, 85, 0.4);
+            box-shadow: 0 5px 15px rgba(255,0,85,0.4);
         }
-        .btn:hover { transform: scale(1.1); box-shadow: 0 5px 25px rgba(255, 0, 85, 0.6); }
+        .btn:hover { transform: scale(1.1); box-shadow: 0 5px 25px rgba(255,0,85,0.6); }
 
-        /* المحتوى الرئيسي */
         #main-content { display: none; padding: 15px; }
 
         .title-main {
-            font-family: 'Marhey';
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin: 30px 0;
+            font-family: 'Marhey'; font-size: 2.2rem;
+            color: var(--primary); margin: 30px 0;
             animation: heartbeat 1.5s infinite;
         }
-        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        @keyframes heartbeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
 
-        /* الكارت الزجاجي */
         .card {
             background: var(--glass);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 600px;
+            border-radius: 20px; padding: 20px;
+            margin: 20px auto; max-width: 600px;
             border: 1px solid rgba(255,255,255,0.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transform: translateY(20px);
-            opacity: 0;
+            transform: translateY(20px); opacity: 0;
             animation: slideUp 0.8s forwards;
         }
         @keyframes slideUp { to { transform: translateY(0); opacity: 1; } }
 
-        /* تنسيق النصوص */
         .message-text {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            white-space: pre-line;
-            text-align: center;
-            color: #eee;
+            font-size: 1.1rem; line-height: 1.9;
+            white-space: pre-line; text-align: center; color: #eee;
         }
         .highlight { color: var(--primary); font-weight: bold; }
-
-        /* تأثير الكتابة (Typewriter) */
-        #typewriter-text {
-            border-left: 2px solid var(--primary); /* مؤشر الكتابة */
-            padding-left: 5px;
-        }
+        #typewriter-text { border-left: 2px solid var(--primary); padding-left: 5px; }
 
         /* العداد */
         .counter-box {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 15px;
+            display: flex; justify-content: center;
+            gap: 10px; flex-wrap: wrap; margin-top: 15px;
         }
         .time-unit {
-            background: rgba(0,0,0,0.6);
-            padding: 10px;
-            min-width: 70px;
-            border-radius: 12px;
+            background: rgba(0,0,0,0.6); padding: 10px;
+            min-width: 70px; border-radius: 12px;
             border: 1px solid var(--primary);
         }
         .time-unit span { display: block; font-size: 1.5rem; font-weight: bold; color: var(--primary); }
         .time-unit label { font-size: 0.8rem; color: #bbb; }
 
-        /* قسم "ليه أنتي؟" */
-        .why-you-grid {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .flip-card {
-            background-color: transparent;
-            width: 100px;
-            height: 100px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
-        .flip-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            text-align: center;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
+        /* Flip Cards */
+        .why-you-grid { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+        .flip-card { background-color: transparent; width: 100px; height: 100px; perspective: 1000px; cursor: pointer; }
+        .flip-card-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
         .flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
-        .flip-front, .flip-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            border: 1px solid var(--primary);
-        }
+        .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 1px solid var(--primary); }
         .flip-front { background: rgba(255,255,255,0.05); color: white; font-size: 2rem; }
         .flip-back { background: var(--primary); color: white; transform: rotateY(180deg); font-size: 0.8rem; padding: 5px; }
 
         /* السلايدر */
-        .slider-container {
-            position: relative;
-            width: 100%;
-            height: 350px;
-            overflow: hidden;
-            border-radius: 15px;
-            margin-top: 15px;
-        }
-        .slide-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-            animation: fade 1.5s;
-        }
-        @keyframes fade { from {opacity: 0.4} to {opacity: 1} }
+        .slider-container { position: relative; width: 100%; height: 350px; overflow: hidden; border-radius: 15px; margin-top: 15px; }
+        .slide-img { width: 100%; height: 100%; object-fit: cover; display: none; animation: fade 1.5s; }
+        @keyframes fade { from{opacity:0.4} to{opacity:1} }
 
-        /* زرار المفاجأة */
         .surprise-btn {
-            background: linear-gradient(45deg, #ff0055, #ff6b6b);
-            margin: 20px 0;
-            padding: 15px 40px;
-            font-size: 1.2rem;
+            background: linear-gradient(45deg,#ff0055,#ff6b6b);
+            margin: 20px 0; padding: 15px 40px; font-size: 1.2rem;
             animation: pulse 2s infinite;
         }
-        @keyframes pulse { 0% {box-shadow: 0 0 0 0 rgba(255, 0, 85, 0.7);} 70% {box-shadow: 0 0 0 15px rgba(255, 0, 85, 0);} 100% {box-shadow: 0 0 0 0 rgba(255, 0, 85, 0);} }
+        @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(255,0,85,0.7)} 70%{box-shadow:0 0 0 15px rgba(255,0,85,0)} 100%{box-shadow:0 0 0 0 rgba(255,0,85,0)} }
 
         /* مشغل الموسيقى */
         .music-fab {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: white;
-            color: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255,0,85,0.5);
-            z-index: 5000;
+            position: fixed; bottom: 20px; right: 20px;
+            width: 50px; height: 50px; background: white;
+            color: var(--primary); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; box-shadow: 0 0 15px rgba(255,0,85,0.5); z-index: 5000;
         }
         .rotating { animation: spin 4s linear infinite; }
-        @keyframes spin { 100% {transform: rotate(360deg);} }
+        @keyframes spin { 100%{transform:rotate(360deg)} }
 
-        /* --- تنسيقات قسم 365 يوم والسينما (جديد) --- */
+        /* 365 رسالة */
         .days-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-            gap: 8px;
-            max-height: 350px;
-            overflow-y: auto;
-            padding: 10px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 15px;
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(60px,1fr));
+            gap: 8px; max-height: 350px; overflow-y: auto; padding: 10px;
+            background: rgba(0,0,0,0.3); border-radius: 15px;
             border: 1px solid rgba(255,255,255,0.1);
         }
-        
         .day-box {
-            aspect-ratio: 1/1;
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.3s;
+            aspect-ratio: 1/1; background: rgba(255,255,255,0.05);
+            border-radius: 10px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            font-size: 0.8rem; cursor: pointer; transition: 0.3s;
             border: 1px solid rgba(255,255,255,0.1);
         }
-
         .day-box.locked { opacity: 0.5; background: #1a1a1a; cursor: not-allowed; }
-        .day-box.unlocked { 
-            background: var(--primary); color: white; 
-            box-shadow: 0 0 10px var(--primary); font-weight: bold; 
-            transform: scale(1.05); border-color: white; 
-        }
+        .day-box.unlocked { background: var(--primary); color: white; box-shadow: 0 0 10px var(--primary); font-weight: bold; transform: scale(1.05); border-color: white; }
 
         .cinema-btn {
-            background: linear-gradient(45deg, #8e44ad, #ff0055);
+            background: linear-gradient(45deg,#8e44ad,#ff0055);
             width: 100%; margin-bottom: 20px; font-size: 1rem;
             animation: glow-btn 2s infinite alternate;
         }
-        @keyframes glow-btn { from {box-shadow: 0 0 5px #8e44ad;} to {box-shadow: 0 0 20px #ff0055;} }
+        @keyframes glow-btn { from{box-shadow:0 0 5px #8e44ad} to{box-shadow:0 0 20px #ff0055} }
 
         .cinema-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -292,302 +177,1076 @@
         .cinema-content { text-align: center; color: white; }
         .beating-heart { font-size: 5rem; animation: heartbeat 1s infinite; }
 
+        /* ========== قسم الفيديوهات ========== */
+        .videos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 12px; margin-top: 15px; }
+        .video-thumb {
+            position: relative; border-radius: 12px; overflow: hidden;
+            cursor: pointer; border: 2px solid rgba(255,0,85,0.3);
+            transition: 0.3s; background: #1a0b12; aspect-ratio: 16/9;
+        }
+        .video-thumb:hover { border-color: var(--primary); transform: scale(1.05); box-shadow: 0 0 20px rgba(255,0,85,0.5); }
+        .video-thumb video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .video-play-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.4); font-size: 2.5rem; transition: 0.3s; }
+        .video-thumb:hover .video-play-icon { background: rgba(255,0,85,0.3); }
+        .video-label { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent,rgba(0,0,0,0.8)); padding: 8px 6px 5px; font-size: 0.75rem; color: #fff; text-align: center; }
+        .video-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 30000; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        .video-modal.active { display: flex; }
+        .video-modal video { max-width: 95vw; max-height: 80vh; border-radius: 15px; border: 2px solid var(--primary); box-shadow: 0 0 40px rgba(255,0,85,0.4); }
+        .video-modal-close { position: absolute; top: 20px; left: 20px; font-size: 2rem; cursor: pointer; color: white; background: var(--primary); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .video-modal-title { margin-top: 15px; font-family: 'Marhey'; font-size: 1.2rem; color: var(--primary); }
+
+        /* ========== لعبة YES/NO ========== */
+        .yesno-question {
+            font-size: 1.15rem; color: #fff;
+            margin-bottom: 25px; min-height: 50px; line-height: 1.6;
+        }
+        .yesno-question .q-num { color: var(--gold); font-weight: bold; font-family: 'Marhey'; }
+        .yesno-btns {
+            display: flex; justify-content: center; gap: 30px;
+            margin-top: 10px; min-height: 70px; align-items: center;
+            position: relative; overflow: hidden; border-radius: 12px;
+            padding: 10px;
+        }
+        .btn-yes {
+            background: #22c55e; color: white; border: none;
+            padding: 12px 35px; border-radius: 25px; font-size: 1.2rem;
+            cursor: pointer; font-family: 'Marhey'; transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(34,197,94,0.4); z-index: 2;
+        }
+        .btn-yes:hover { transform: scale(1.1); }.btn-no {
+    background: #ef4444;
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-family: 'Marhey';
+    box-shadow: 0 5px 15px rgba(239,68,68,0.4);
+    position: fixed;
+    z-index: 99999;
+}
+
+            transition: top 0.15s ease, left 0.15s ease, right 0.15s ease, bottom 0.15s ease;
+        }
+        .yesno-progress { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+        .yesno-dot { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.2); transition: 0.3s; }
+        .yesno-dot.done { background: #22c55e; }
+        .yesno-dot.active { background: var(--primary); transform: scale(1.3); }
+        .yesno-result { display: none; text-align: center; }
+        .yesno-result .big-heart { font-size: 4rem; animation: heartbeat 1s infinite; }
+        .yesno-result p { font-size: 1.1rem; margin-top: 10px; color: #eee; }
+
+        /* ========== رسالة myvoice3 ========== */
+        .voice-message-card {
+            background: linear-gradient(135deg, rgba(142,68,173,0.2), rgba(255,0,85,0.2));
+            border: 1px solid rgba(142,68,173,0.5);
+        }
+        .voice-play-btn {
+            background: linear-gradient(45deg, #8e44ad, #ff0055);
+            font-size: 1.1rem; padding: 15px 35px;
+            animation: glow-btn 2s infinite alternate;
+            margin-top: 15px;
+        }
+        .voice-wave {
+            display: none; justify-content: center;
+            align-items: center; gap: 4px; margin: 15px auto; height: 40px;
+        }
+        .voice-wave.playing { display: flex; }
+        .wave-bar {
+            width: 4px; background: var(--primary);
+            border-radius: 2px; animation: wave 0.8s ease-in-out infinite alternate;
+        }
+        .wave-bar:nth-child(1){height:10px;animation-delay:0s}
+        .wave-bar:nth-child(2){height:25px;animation-delay:0.1s}
+        .wave-bar:nth-child(3){height:35px;animation-delay:0.2s}
+        .wave-bar:nth-child(4){height:20px;animation-delay:0.3s}
+        .wave-bar:nth-child(5){height:40px;animation-delay:0.4s}
+        .wave-bar:nth-child(6){height:28px;animation-delay:0.5s}
+        .wave-bar:nth-child(7){height:15px;animation-delay:0.6s}
+        .wave-bar:nth-child(8){height:32px;animation-delay:0.7s}
+        .wave-bar:nth-child(9){height:22px;animation-delay:0.8s}
+        @keyframes wave { from{transform:scaleY(0.4)} to{transform:scaleY(1)} }
+
+        /* ========== قسم الأسئلة ========== */
+        .question-item {
+            background: rgba(0,0,0,0.4); border-radius: 15px;
+            padding: 20px; margin-bottom: 15px;
+            border: 1px solid rgba(255,0,85,0.2); text-align: right;
+        }
+        .question-item h4 { color: var(--primary); font-size: 1rem; margin-bottom: 12px; display: flex; gap: 8px; align-items: flex-start; }
+        .question-item h4 span.qnum { background: var(--primary); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; }
+        .question-item textarea { width: 100%; min-height: 80px; resize: vertical; border-radius: 12px; border: 1px solid rgba(255,0,85,0.3); background: rgba(255,255,255,0.05); color: white; padding: 10px 15px; font-size: 0.95rem; font-family: 'Cairo',sans-serif; text-align: right; }
+        .save-answer-btn { background: transparent; border: 1px solid var(--primary); color: var(--primary); padding: 7px 20px; border-radius: 20px; cursor: pointer; font-family: 'Cairo'; font-size: 0.9rem; margin-top: 8px; transition: 0.3s; }
+        .save-answer-btn:hover { background: var(--primary); color: white; }
+        .questions-save-all { background: linear-gradient(45deg,#ff0055,#ff6b35); width: 100%; font-size: 1rem; padding: 12px; margin-top: 10px; }
+        .send-status { margin-top: 12px; padding: 10px; border-radius: 10px; font-size: 0.95rem; display: none; }
+        .send-status.success { background: rgba(34,197,94,0.2); border: 1px solid #22c55e; color: #22c55e; display: block; }
+        .send-status.error { background: rgba(239,68,68,0.2); border: 1px solid #ef4444; color: #ef4444; display: block; }
+        .send-status.sending { background: rgba(255,200,0,0.15); border: 1px solid var(--gold); color: var(--gold); display: block; }
     </style>
 </head>
 <body>
 
-    <div id="login-screen">
-        <div class="login-card">
-            <h1 style="font-family: 'Marhey'; color: var(--primary); margin-bottom: 10px;">Menna & Ashraf</h1>
-            <p style="margin-bottom: 10px;">🔒 اكتبي تاريخ عيد ميلادك المميز</p>
-            <input type="text" id="password" placeholder="DD/MM" autocomplete="off">
-            <br>
-            <button class="btn" onclick="checkPass()">Unlock My Heart ❤️</button>
-            <p id="error" style="color: #ff3333; display: none; margin-top: 15px; font-weight: bold;">
-                غلط يا منوووش.. ركزي 😉
-            </p>
-        </div>
+<!-- شاشة الدخول -->
+<div id="login-screen">
+    <div class="login-card">
+        <h1 style="font-family:'Marhey';color:var(--primary);margin-bottom:10px;">Menna & Ashraf</h1>
+        <p style="margin-bottom:10px;">🔒 اكتبي تاريخ عيد ميلادك المميز</p>
+        <input type="text" id="password" placeholder="DD/MM" autocomplete="off" onkeydown="if(event.key==='Enter')checkPass()">
+        <br>
+        <button class="btn" onclick="checkPass()">Unlock My Heart ❤️</button>
+        <p id="error" style="color:#ff3333;display:none;margin-top:15px;font-weight:bold;">غلط يا منوووش.. ركزي 😉</p>
+    </div>
+</div>
+
+<!-- المحتوى الرئيسي -->
+<div id="main-content">
+
+    <h2 class="title-main">❤️ Happy Valentine's ❤️</h2>
+
+    <!-- رسالة Typewriter -->
+    <div class="card" style="min-height:200px;">
+        <h3 style="color:var(--primary);margin-bottom:15px;">إلى أغلى ما في حياتي 🌏</h3>
+        <p id="typewriter-text" class="message-text"></p>
     </div>
 
-    <div id="main-content">
+    <button class="btn surprise-btn" onclick="rainHearts()">✨ دوسي هنا يا منوش ✨</button>
 
-        <h2 class="title-main">❤️ Happy Valentine's ❤️</h2>
-
-        <div class="card" style="min-height: 200px;">
-            <h3 style="color: var(--primary); margin-bottom: 15px;">إلى أغلى ما في حياتي 🌏</h3>
-            <p id="typewriter-text" class="message-text"></p>
+    <!-- العداد -->
+    <div class="card">
+        <h3>قصة حبنا بدأت من.. ⏳</h3>
+        <h4 style="color:var(--gold);font-family:'Marhey';margin-top:5px;">25/12/2025</h4>
+        <div class="counter-box">
+            <div class="time-unit"><span id="days">0</span><label>يوم</label></div>
+            <div class="time-unit"><span id="hours">0</span><label>ساعة</label></div>
+            <div class="time-unit"><span id="minutes">0</span><label>دقيقة</label></div>
+            <div class="time-unit"><span id="seconds">0</span><label>ثانية</label></div>
         </div>
+        <p style="font-size:0.8rem;margin-top:10px;color:#aaa;">وكل ثانية بتعدي بحبك أكتر ❤️</p>
+    </div>
 
-        <button class="btn surprise-btn" onclick="rainHearts()">✨ دوسي هنا يا منوش ✨</button>
-
-        <div class="card">
-            <h3>قصة حبنا بدأت من.. ⏳</h3>
-            <h4 style="color: var(--gold); font-family: 'Marhey'; margin-top: 5px;">25/12/2025</h4>
-            <div class="counter-box">
-                <div class="time-unit"><span id="days">0</span><label>يوم</label></div>
-                <div class="time-unit"><span id="hours">0</span><label>ساعة</label></div>
-                <div class="time-unit"><span id="minutes">0</span><label>دقيقة</label></div>
-                <div class="time-unit"><span id="seconds">0</span><label>ثانية</label></div>
-            </div>
-            <p style="font-size: 0.8rem; margin-top: 10px; color: #aaa;">وكل ثانية بتعدي بحبك أكتر ❤️</p>
-        </div>
-
-        <div class="card">
-            <h3>ليه أنتي بالذات؟ 🤔❤️</h3>
-            <div class="why-you-grid">
-                <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                    <div class="flip-card-inner">
-                        <div class="flip-front"><i class="fas fa-heart"></i></div>
-                        <div class="flip-back">عشان حنيتك عليا مش موجودة في الدنيا</div>
-                    </div>
-                </div>
-                <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                    <div class="flip-card-inner">
-                        <div class="flip-front"><i class="fas fa-gem"></i></div>
-                        <div class="flip-back">عشان أنتي رزق ربنا ليا وأحلى صدفة</div>
-                    </div>
-                </div>
-                <div class="flip-card" onclick="this.classList.toggle('flipped')">
-                    <div class="flip-card-inner">
-                        <div class="flip-front"><i class="fas fa-brain"></i></div>
-                        <div class="flip-back">عشان بتفهميني من عيني قبل ما أتكلم</div>
-                    </div>
+    <!-- كروت Flip -->
+    <div class="card">
+        <h3>ليه أنتي بالذات؟ 🤔❤️</h3>
+        <div class="why-you-grid">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-front"><i class="fas fa-heart"></i></div>
+                    <div class="flip-back">عشان حنيتك عليا مش موجودة في الدنيا</div>
                 </div>
             </div>
-            <p style="font-size: 0.8rem; margin-top: 15px; color: #bbb;">(دوسي على المربعات عشان تعرفي 😉)</p>
-        </div>
-
-        <div class="card">
-            <h3>ذكرياتنا الحلوة 📸</h3>
-            <div class="slider-container">
-                <img class="slide-img" src="1.jpeg"><img class="slide-img" src="2.jpeg">
-                <img class="slide-img" src="3.jpeg"><img class="slide-img" src="4.jpeg">
-                <img class="slide-img" src="5.jpeg"><img class="slide-img" src="6.jpeg">
-                <img class="slide-img" src="7.jpeg"><img class="slide-img" src="8.jpeg">
-                <img class="slide-img" src="9.jpeg"><img class="slide-img" src="10.png">
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-front"><i class="fas fa-gem"></i></div>
+                    <div class="flip-back">عشان أنتي رزق ربنا ليا وأحلى صدفة</div>
+                </div>
+            </div>
+            <div class="flip-card" onclick="this.classList.toggle('flipped')">
+                <div class="flip-card-inner">
+                    <div class="flip-front"><i class="fas fa-brain"></i></div>
+                    <div class="flip-back">عشان بتفهميني من عيني قبل ما أتكلم</div>
+                </div>
             </div>
         </div>
+        <p style="font-size:0.8rem;margin-top:15px;color:#bbb;">(دوسي على المربعات عشان تعرفي 😉)</p>
+    </div>
 
-        <div class="card" style="border: 1px solid var(--primary);">
-            <h3 style="margin-bottom: 10px; color: var(--gold);">📅 رحلة الـ 365 رسالة</h3>
-            <p style="font-size: 0.9rem; margin-bottom: 20px; color: #ccc;">
-                كل يوم ليكي رسالة جديدة.. ممنوع الغش 😉❤️
-            </p>
+    <!-- السلايدر -->
+    <div class="card">
+        <h3>ذكرياتنا الحلوة 📸</h3>
+        <div class="slider-container">
+            <img class="slide-img" src="1.jpeg"><img class="slide-img" src="2.jpeg">
+            <img class="slide-img" src="3.jpeg"><img class="slide-img" src="4.jpeg">
+            <img class="slide-img" src="5.jpeg"><img class="slide-img" src="6.jpeg">
+            <img class="slide-img" src="7.jpeg"><img class="slide-img" src="8.jpeg">
+            <img class="slide-img" src="9.jpeg"><img class="slide-img" src="10.png">
+        </div>
+    </div>
 
-            <button class="btn cinema-btn" onclick="openCinemaMode()">
-                <i class="fas fa-headphones-alt"></i> اسمعي دي بصوتي 🎤
-            </button>
+    <!-- ========== رسالة بصوتي - myvoice3 ========== -->
+    <div class="card voice-message-card">
+        <h3 style="color:#c084fc;">💌 رسالة ليكي بصوتي</h3>
+        <p style="font-size:0.9rem;color:#ccc;margin:10px 0;">رسالة سجلتها من قلبي.. اسمعيها لوحدك 🎙️❤️</p>
+        <div class="voice-wave" id="voiceWave3">
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div><div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+        </div>
+        <button class="btn voice-play-btn" id="voiceBtn3" onclick="toggleVoice3()">
+            <i class="fas fa-play"></i> اسمعي رسالتي 🎙️
+        </button>
+    </div>
 
-            <div class="days-grid" id="days-container"></div>
-
-            <div id="forever-div" style="display: none; margin-top: 30px;">
-                <p>انتهت السنة.. بس حبنا لسه بيبتدي ♾️</p>
-                <button class="btn" onclick="alert('Forever Mode Activated! 💍❤️\nحبك في قلبي ملوش نهاية!')">
-                    Activate Forever Mode 🚀
-                </button>
+    <!-- الفيديوهات -->
+    <div class="card">
+        <h3>🎬 فيديوهاتنا الحلوة</h3>
+        <p style="font-size:0.85rem;color:#bbb;margin:8px 0 15px;">دوسي على أي فيديو عشان يشتغل 🎵</p>
+        <div class="videos-grid">
+            <div class="video-thumb" onclick="openVideo('video1.mp4','الفيديو الأول 🎶')">
+                <video src="video1.mp4" muted preload="metadata"></video>
+                <div class="video-play-icon">▶️</div>
+                <div class="video-label">الفيديو الأول 🎶</div>
+            </div>
+            <div class="video-thumb" onclick="openVideo('video2.mp4','الفيديو التاني 💕')">
+                <video src="video2.mp4" muted preload="metadata"></video>
+                <div class="video-play-icon">▶️</div>
+                <div class="video-label">الفيديو التاني 💕</div>
+            </div>
+            <div class="video-thumb" onclick="openVideo('video3.mp4','الفيديو التالت 🔥')">
+                <video src="video3.mp4" muted preload="metadata"></video>
+                <div class="video-play-icon">▶️</div>
+                <div class="video-label">الفيديو التالت 🔥</div>
+            </div>
+            <div class="video-thumb" onclick="openVideo('video4.mp4','الفيديو الرابع 🌹')">
+                <video src="video4.mp4" muted preload="metadata"></video>
+                <div class="video-play-icon">▶️</div>
+                <div class="video-label">الفيديو الرابع 🌹</div>
+            </div>
+            <div class="video-thumb" onclick="openVideo('video5.mp4','الفيديو الخامس 👑')">
+                <video src="video5.mp4" muted preload="metadata"></video>
+                <div class="video-play-icon">▶️</div>
+                <div class="video-label">الفيديو الخامس 👑</div>
             </div>
         </div>
-
-        <div class="card" style="border-color: var(--gold);">
-            <h3 style="color: var(--primary); margin-bottom: 10px;">لـ ست البنات 👑</h3>
-            <p class="message-text">
-                في الآخر عايز أقولك كلمة وعد.. ✋
-                أنا <span class="highlight">جنبك</span>، و<span class="highlight">سندك</span>، و<span class="highlight">ضهرك</span> 💪
-                ومش هسمح لحد ياخدك مني ولا هخلي أي حاجة تزعلك في الدنيا دي 🛡️
-                
-                أنا معاكي وجنبك.. والموقع ده هيفضل ويكبر معانا زي حبنا بالظبط 📈
-                
-                كل عيد وأنتي معايا.. 💑
-                كل لحظة وأنتي معايا..
-                
-                <b style="color: var(--primary); font-size: 1.3rem;">بحبك يا منووووووووش ❤️</b>
-            </p>
-        </div>
-
-        <h2 class="title-main">✨ Happy Valentine's Day ✨</h2>
-        <p style="opacity: 0.7; font-size: 0.8rem;">Made with Love by <b>ELFROUN</b> 💻👑</p>
-
+    </div>
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-close" onclick="closeVideo()">✕</div>
+        <video id="modalVideo" controls></video>
+        <p class="video-modal-title" id="modalVideoTitle"></p>
     </div>
 
-    <div id="cinema-overlay" class="cinema-overlay" onclick="closeCinemaMode()">
-        <div class="cinema-content">
-            <div class="beating-heart">❤️</div>
-            <p style="margin-top: 20px; font-size: 1.2rem;">This is how my heart sounds when it loves you...</p>
-            <p style="font-size: 0.8rem; color: #aaa;">(دوسي في أي حتة عشان تقفلي)</p>
+    <!-- ========== لعبة YES/NO ========== -->
+    <div class="card">
+        <h3>😈 لعبة نعم أو لأ!</h3>
+        <p style="font-size:0.85rem;color:#bbb;margin:10px 0 20px;">ممنوع تضغطي على "لأ" 😂❤️</p>
+        <div class="yesno-progress" id="yesnoProgress"></div>
+        <div class="yesno-question" id="yesnoQuestion"></div>
+        <div class="yesno-btns" id="yesnoBtns">
+            <button class="btn-yes" onclick="answerYes()">نعم ✅</button>
+            <button class="btn-no" id="noBtn" onmouseover="runAway()" ontouchstart="runAway()">لأ ❌</button>
+        </div>
+        <div class="yesno-result" id="yesnoResult">
+            <div class="big-heart">❤️</div>
+            <p>تسلم تسلم يا منوووش! 💍<br>عارفه إن مش هتقدري تقولي لأ 😂❤️</p>
+            <button class="btn" style="margin-top:15px;" onclick="restartYesno()">العبيها تاني 🔄</button>
         </div>
     </div>
 
-    <audio id="bg-music" loop>
-        <source src="song.mp3" type="audio/mpeg">
-    </audio>
-    
-    <audio id="special-song">
-        <source src="myvoice.ogg" type="audio/ogg">
-    </audio>
-
-    <div class="music-fab" onclick="toggleMusic()">
-        <i class="fas fa-music" id="music-icon"></i>
+    <!-- ========== قسم الأسئلة ========== -->
+    <div class="card">
+        <h3>💬 أسئلة من قلبي.. إجاباتك من قلبك</h3>
+        <p style="font-size:0.85rem;color:#bbb;margin:10px 0 20px;">
+            دي أسئلة بحب أعرف إجاباتها منك.. خدي وقتك واكتبي 🥺❤️<br>
+            <span style="color:#ffd700;font-size:0.8rem;">⚡ إجاباتك بتوصلني على إيميلي أوتوماتيك</span>
+        </p>
+        <div id="questions-container"></div>
+        <button class="btn questions-save-all" onclick="sendAllAnswers()">
+            💌 ابعتيلي إجاباتك
+        </button>
+        <div id="send-status" class="send-status"></div>
     </div>
 
-    <script>
-        /* ======================
-           3. المنطق (JavaScript)
-           ====================== */
+    <!-- 365 رسالة -->
+    <div class="card" style="border:1px solid var(--primary);">
+        <h3 style="margin-bottom:10px;color:var(--gold);">📅 رحلة الـ 365 رسالة</h3>
+        <p style="font-size:0.9rem;margin-bottom:20px;color:#ccc;">كل يوم ليكي رسالة جديدة.. ممنوع الغش 😉❤️</p>
+        <button class="btn cinema-btn" onclick="openCinemaMode()">
+            <i class="fas fa-headphones-alt"></i> اسمعي دي بصوتي 🎤
+        </button>
+        <div class="days-grid" id="days-container"></div>
+        <div id="forever-div" style="display:none;margin-top:30px;">
+            <p>انتهت السنة.. بس حبنا لسه بيبتدي ♾️</p>
+            <button class="btn" onclick="alert('Forever Mode Activated! 💍❤️\nحبك في قلبي ملوش نهاية!')">Activate Forever Mode 🚀</button>
+        </div>
+    </div>
 
-        // --- 1. الدخول ---
-        function checkPass() {
-            const pass = document.getElementById('password').value;
-            if (pass === "11/11") {
-                document.getElementById('login-screen').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('login-screen').style.display = 'none';
-                    document.getElementById('main-content').style.display = 'block';
-                    playAudio(); // تشغيل الموسيقى
-                    startTypewriter(); // تشغيل الكتابة
-                }, 1000);
-            } else {
-                const card = document.querySelector('.login-card');
-                card.animate([{transform: 'translateX(0)'}, {transform: 'translateX(-10px)'}, {transform: 'translateX(10px)'}, {transform: 'translateX(0)'}], {duration: 300});
-                document.getElementById('error').style.display = 'block';
-            }
-        }
+    <!-- رسالة الختام -->
+    <div class="card" style="border-color:var(--gold);">
+        <h3 style="color:var(--primary);margin-bottom:10px;">لـ ست البنات 👑</h3>
+        <p class="message-text">في الآخر عايز أقولك كلمة وعد.. ✋
+أنا <span class="highlight">جنبك</span>، و<span class="highlight">سندك</span>، و<span class="highlight">ضهرك</span> 💪
+ومش هسمح لحد ياخدك مني ولا هخلي أي حاجة تزعلك في الدنيا دي 🛡️
 
-        // --- 2. الكتابة التلقائية ---
-        const textToType = `يا منّه يا أحلى حاجة حصلتلي فـ حياتي.. يا أجمل بنت فـ الدنيا 🌏❤️
-        
-        25/12/2025 📅
-        ده اليوم اللي قلبي خلاص وقع واستسلم ليكي 🏳️.. ومن ساعتها وأنا مش شايف غيرك ولا عايز غيرك..
-        
-        ميشوووو.. مش بس حبيبتي.. دي أحلى حاجة حصلتلي فـ حياتي وأكتر حاجة بخاف عليها أكتر من نفسي 🥺💍
-        
-        حبيت أعملك هدية حلوة كدا.. والمكان ده عشان يفكرك دايماً إننا مهما كنا بعاد وإن الدنيا تلهينا عن بعض.. هتفضلي فـ قلبي.. وكل لحظة فـ يومي مش بتروحي من على بالي 🧠🤍
-        
-        أنتي فـ قلبي وفـ حياتي..
-        بحبك يا منوووووووووووووووش 🗣️❤️`;
+أنا معاكي وجنبك.. والموقع ده هيفضل ويكبر معانا زي حبنا بالظبط 📈
 
-        let typeIdx = 0;
-        function startTypewriter() {
-            if (typeIdx < textToType.length) {
-                document.getElementById("typewriter-text").innerHTML += textToType.charAt(typeIdx) === '\n' ? '<br>' : textToType.charAt(typeIdx);
-                typeIdx++;
-                setTimeout(startTypewriter, 50);
-            }
-        }
+كل عيد وأنتي معايا.. 💑
+كل لحظة وأنتي معايا..
 
-        // --- 3. مطر القلوب ---
-        function rainHearts() {
-            const duration = 5000; 
-            const end = Date.now() + duration;
-            (function frame() {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-rain');
-                heart.innerText = Math.random() > 0.5 ? '❤️' : '💍';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.fontSize = Math.random() * 20 + 20 + 'px';
-                heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 5000);
-                if (Date.now() < end) requestAnimationFrame(frame);
-            }());
-        }
+<b style="color:var(--primary);font-size:1.3rem;">بحبك يا منووووووووش ❤️</b></p>
+    </div>
 
-        // --- 4. العداد ---
-        const startDate = new Date("December 25, 2025 10:35:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const diff = now - startDate;
-            document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+    <h2 class="title-main">✨ Happy Valentine's Day ✨</h2>
+    <p style="opacity:0.7;font-size:0.8rem;">Made with Love by <b>ELFROUN</b> 💻👑</p>
+</div>
+
+<!-- Cinema Overlay -->
+<div id="cinema-overlay" class="cinema-overlay" onclick="closeCinemaMode()">
+    <div class="cinema-content">
+        <div class="beating-heart">❤️</div>
+        <p style="margin-top:20px;font-size:1.2rem;">This is how my heart sounds when it loves you...</p>
+        <p style="font-size:0.8rem;color:#aaa;">(دوسي في أي حتة عشان تقفلي)</p>
+    </div>
+</div>
+
+<!-- الأصوات -->
+<audio id="bg-music" loop><source src="song.mp3" type="audio/mpeg"></audio>
+<audio id="special-song"><source src="myvoice.ogg" type="audio/ogg"></audio>
+<audio id="voice-message-3"><source src="myvoice3.ogg" type="audio/ogg"><source src="myvoice3.mp3" type="audio/mpeg"></audio>
+<audio id="yes-sound"><source src="myvoice2.ogg" type="audio/ogg"><source src="myvoice2.mp3" type="audio/mpeg"></audio>
+
+<div class="music-fab" onclick="toggleMusic()">
+    <i class="fas fa-music" id="music-icon"></i>
+</div>
+
+<script>
+// ==========================================
+// 1. الدخول
+// ==========================================
+function checkPass() {
+    const pass = document.getElementById('password').value;
+    if (pass === "11/11") {
+        document.getElementById('login-screen').style.opacity = '0';
+        setTimeout(() => {
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+            playAudio();
+            startTypewriter();
+            initDailyMessages();
+            initQuestions();
+            initYesno();
         }, 1000);
+    } else {
+        const card = document.querySelector('.login-card');
+        card.animate([{transform:'translateX(0)'},{transform:'translateX(-10px)'},{transform:'translateX(10px)'},{transform:'translateX(0)'}],{duration:300});
+        document.getElementById('error').style.display = 'block';
+    }
+}
 
-        // --- 5. السلايدر ---
-        let slideIndex = 0;
-        function showSlides() {
-            let slides = document.getElementsByClassName("slide-img");
-            for (let j = 0; j < slides.length; j++) slides[j].style.display = "none";
-            slideIndex++;
-            if (slideIndex > slides.length) slideIndex = 1;
-            slides[slideIndex - 1].style.display = "block";
-            setTimeout(showSlides, 3000);
+// ==========================================
+// 2. Typewriter
+// ==========================================
+const textToType = `يا منّه يا أحلى حاجة حصلتلي فـ حياتي.. يا أجمل بنت فـ الدنيا 🌏❤️
+        
+25/12/2025 📅
+ده اليوم اللي قلبي خلاص وقع واستسلم ليكي 🏳️.. ومن ساعتها وأنا مش شايف غيرك ولا عايز غيرك..
+
+ميشوووو.. مش بس حبيبتي.. دي أحلى حاجة حصلتلي فـ حياتي وأكتر حاجة بخاف عليها أكتر من نفسي 🥺💍
+
+حبيت أعملك هدية حلوة كدا.. والمكان ده عشان يفكرك دايماً إننا مهما كنا بعاد وإن الدنيا تلهينا عن بعض.. هتفضلي فـ قلبي.. وكل لحظة فـ يومي مش بتروحي من على بالي 🧠🤍
+
+أنتي فـ قلبي وفـ حياتي..
+بحبك يا منوووووووووووووووش 🗣️❤️`;
+
+let typeIdx = 0;
+function startTypewriter() {
+    if (typeIdx < textToType.length) {
+        document.getElementById("typewriter-text").innerHTML += textToType.charAt(typeIdx) === '\n' ? '<br>' : textToType.charAt(typeIdx);
+        typeIdx++;
+        setTimeout(startTypewriter, 50);
+    }
+}
+
+// ==========================================
+// 3. مطر القلوب
+// ==========================================
+function rainHearts() {
+    const duration = 5000;
+    const end = Date.now() + duration;
+    (function frame() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart-rain');
+        heart.innerText = Math.random() > 0.5 ? '❤️' : '💍';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+        heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+        if (Date.now() < end) requestAnimationFrame(frame);
+    }());
+}
+
+// ==========================================
+// 4. العداد
+// ==========================================
+const startDate = new Date("December 25, 2025 10:35:00").getTime();
+setInterval(() => {
+    const now = new Date().getTime();
+    const diff = now - startDate;
+    document.getElementById("days").innerText = Math.floor(diff / (1000*60*60*24));
+    document.getElementById("hours").innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    document.getElementById("minutes").innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
+    document.getElementById("seconds").innerText = Math.floor((diff % (1000*60)) / 1000);
+}, 1000);
+
+// ==========================================
+// 5. السلايدر
+// ==========================================
+let slideIndex = 0;
+function showSlides() {
+    let slides = document.getElementsByClassName("slide-img");
+    for (let j = 0; j < slides.length; j++) slides[j].style.display = "none";
+    slideIndex++;
+    if (slideIndex > slides.length) slideIndex = 1;
+    slides[slideIndex-1].style.display = "block";
+    setTimeout(showSlides, 3000);
+}
+showSlides();
+
+// ==========================================
+// 6. الموسيقى
+// ==========================================
+const music = document.getElementById("bg-music");
+const fab = document.querySelector('.music-fab');
+let musicWasPaused = false;
+function playAudio() { music.play().then(() => fab.classList.add('rotating')).catch(() => {}); }
+function toggleMusic() {
+    if (music.paused) { music.play(); fab.classList.add('rotating'); }
+    else { music.pause(); fab.classList.remove('rotating'); }
+}
+
+// ==========================================
+// 7. رسالة myvoice3
+// ==========================================
+const voice3 = document.getElementById('voice-message-3');
+let voice3Playing = false;
+
+function toggleVoice3() {
+    const btn = document.getElementById('voiceBtn3');
+    const wave = document.getElementById('voiceWave3');
+    if (!voice3Playing) {
+        if (!music.paused) { music.pause(); fab.classList.remove('rotating'); musicWasPaused = false; }
+        else { musicWasPaused = true; }
+        voice3.play().catch(() => {});
+        voice3Playing = true;
+        btn.innerHTML = '<i class="fas fa-pause"></i> إيقاف';
+        wave.classList.add('playing');
+    } else {
+        voice3.pause();
+        voice3Playing = false;
+        btn.innerHTML = '<i class="fas fa-play"></i> اسمعي رسالتي 🎙️';
+        wave.classList.remove('playing');
+        if (!musicWasPaused) { music.play(); fab.classList.add('rotating'); }
+    }
+}
+voice3.addEventListener('ended', () => {
+    voice3Playing = false;
+    document.getElementById('voiceBtn3').innerHTML = '<i class="fas fa-play"></i> اسمعي رسالتي تاني 🎙️';
+    document.getElementById('voiceWave3').classList.remove('playing');
+    if (!musicWasPaused) { music.play(); fab.classList.add('rotating'); }
+});
+
+// ==========================================
+// 8. الفيديوهات
+// ==========================================
+const videoModal = document.getElementById('videoModal');
+const modalVideo = document.getElementById('modalVideo');
+const modalTitle = document.getElementById('modalVideoTitle');
+
+function openVideo(src, title) {
+    if (!music.paused) { musicWasPaused = false; music.pause(); fab.classList.remove('rotating'); }
+    else { musicWasPaused = true; }
+    modalVideo.src = src;
+    modalTitle.innerText = title;
+    videoModal.classList.add('active');
+    modalVideo.play().catch(() => {});
+}
+function closeVideo() {
+    modalVideo.pause(); modalVideo.src = '';
+    videoModal.classList.remove('active');
+    if (!musicWasPaused) { music.play(); fab.classList.add('rotating'); }
+}
+videoModal.addEventListener('click', function(e) { if (e.target === videoModal) closeVideo(); });
+
+// ==========================================
+// 9. لعبة YES/NO
+// ==========================================
+const yesnoQuestions = [
+    "هل بتحبي أشرف؟ 💕",
+    "هل أشرف أحسن واحد في حياتك؟ 👑",
+    "هل مستعدة تكملي معاه باقي عمرك؟ 💍",
+    "هل بتحسي بالأمان لما بتكوني معاه؟ 🛡️",
+    "هل أشرف بيستاهل كل حاجة؟ 🌟"
+];
+let yesnoIndex = 0;
+
+function initYesno() {
+    const prog = document.getElementById('yesnoProgress');
+    prog.innerHTML = '';
+    yesnoQuestions.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.classList.add('yesno-dot');
+        if (i === 0) dot.classList.add('active');
+        prog.appendChild(dot);
+    });
+    showYesnoQuestion(0);
+  const noBtn = document.getElementById('noBtn');
+noBtn.style.position = 'fixed';
+noBtn.style.left = '60%';
+noBtn.style.top = '60%';
+noBtn.style.transform = 'none';
+noBtn.style.zIndex = '99999';
+
+    document.getElementById('yesnoBtns').style.display = 'flex';
+    document.getElementById('yesnoResult').style.display = 'none';
+}
+
+function showYesnoQuestion(idx) {
+    document.getElementById('yesnoQuestion').innerHTML =
+        `<span class="q-num">سؤال ${idx+1}/${yesnoQuestions.length}</span><br>${yesnoQuestions[idx]}`;
+}
+
+function answerYes() {
+    // شغل صوت myvoice2
+    const yesSound = document.getElementById('yes-sound');
+    yesSound.currentTime = 0;
+    yesSound.play().catch(() => {});
+
+    const dots = document.querySelectorAll('.yesno-dot');
+    dots[yesnoIndex].classList.remove('active');
+    dots[yesnoIndex].classList.add('done');
+    yesnoIndex++;
+    if (yesnoIndex < yesnoQuestions.length) {
+        dots[yesnoIndex].classList.add('active');
+        // reset no button position
+        const noBtn = document.getElementById('noBtn');
+        noBtn.style.left = ''; noBtn.style.top = '';
+        noBtn.style.position = 'absolute';
+        showYesnoQuestion(yesnoIndex);
+    } else {
+        document.getElementById('yesnoBtns').style.display = 'none';
+        document.getElementById('yesnoQuestion').innerText = '';
+        document.getElementById('yesnoResult').style.display = 'block';
+        rainHearts();
+    }
+}
+
+function runAway() {
+    const noBtn = document.getElementById('noBtn');
+
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
+
+    const btnWidth = noBtn.offsetWidth;
+    const btnHeight = noBtn.offsetHeight;
+
+    const randomX = Math.random() * (screenWidth - btnWidth);
+    const randomY = Math.random() * (screenHeight - btnHeight);
+
+    noBtn.style.position = 'fixed';
+    noBtn.style.left = randomX + 'px';
+    noBtn.style.top = randomY + 'px';
+    noBtn.style.zIndex = '99999';
+}
+
+
+
+function restartYesno() {
+    yesnoIndex = 0;
+    initYesno();
+}
+
+// ==========================================
+// 10. الأسئلة + الإجابات → Formspree
+// ==========================================
+const questions = [
+    "حاجة غريبة فيا بس جذابة بالنسبة ليكي.. إيه هي؟ 🤔",
+    "حاجة بتعصبك وتستفزك لو عملتها.. إيه هي؟ 😤",
+    "هل قبل كده كلمتي حد عني وحكيتي عني؟ 🗣️",
+    "هل في قصة ليا ممكن تخليكي تغاري عليا؟ 😏",
+    "أكتر لحظة حسيتي فيها بأمان معايا إمتى كانت؟ 🛡️",
+    "لو عندك كلمة واحدة توصفيني بيها.. إيه هي؟ 💬",
+    "حاجة بتتمنيها في علاقتنا وما قولتيهاليش لحد دلوقتي؟ 🌙",
+    "إيه اللي خلاكي تحسي إني الشخص الصح؟ 💡",
+    "أحلى ذكرى بيننا في رأيك إيه؟ 📸",
+    "لو كتبتيلي جواب حب.. أول جملة هتكون إيه؟ 💌"
+];
+
+function initQuestions() {
+    const container = document.getElementById('questions-container');
+    container.innerHTML = '';
+    questions.forEach((q, i) => {
+        const div = document.createElement('div');
+        div.classList.add('question-item');
+        div.innerHTML = `
+            <h4>
+                <span class="qnum">${i+1}</span>
+                <span>${q}</span>
+            </h4>
+            <textarea id="answer_${i}" placeholder="اكتبي هنا يا منوش.. كلامك أمانة عندي 🤍" dir="rtl"></textarea>
+        `;
+        container.appendChild(div);
+    });
+}
+
+async function sendAllAnswers() {
+    const statusEl = document.getElementById('send-status');
+    // جمع الإجابات
+    let hasAnswer = false;
+    let emailBody = '💌 إجابات منة على الأسئلة:\n\n';
+    questions.forEach((q, i) => {
+        const ta = document.getElementById(`answer_${i}`);
+        const val = ta ? ta.value.trim() : '';
+        if (val) hasAnswer = true;
+        emailBody += `❓ السؤال ${i+1}: ${q}\n✍️ الإجابة: ${val || '(لم تجيبي)'}\n\n`;
+    });
+
+    if (!hasAnswer) {
+        statusEl.className = 'send-status error';
+        statusEl.innerText = '⚠️ اكتبي إجابة واحدة على الأقل يا منوش!';
+        return;
+    }
+
+    statusEl.className = 'send-status sending';
+    statusEl.innerText = '⏳ بتتبعت.. استني لحظة...';
+
+    try {
+        const res = await fetch('https://formspree.io/f/mbdakbdn', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+                subject: '💌 إجابات منة على أسئلتي ❤️',
+                message: emailBody
+            })
+        });
+        if (res.ok) {
+            statusEl.className = 'send-status success';
+            statusEl.innerText = '✅ وصلتلي إجاباتك! شكراً يا منوووش ❤️';
+            rainHearts();
+        } else {
+            throw new Error('فشل');
         }
-        showSlides();
+    } catch(e) {
+        statusEl.className = 'send-status error';
+        statusEl.innerText = '❌ في مشكلة في الإرسال.. جربي تاني بعد شوية';
+    }
+}
 
-        // --- 6. الموسيقى ---
-        const music = document.getElementById("bg-music");
-        const fab = document.querySelector('.music-fab');
-        function playAudio() { music.play().then(() => fab.classList.add('rotating')).catch(() => {}); }
-        function toggleMusic() {
-            if (music.paused) { music.play(); fab.classList.add('rotating'); }
-            else { music.pause(); fab.classList.remove('rotating'); }
+// ==========================================
+// 11. نظام 365 رسالة
+// ==========================================
+const startDateConfig = new Date("February 14, 2026 00:00:00");
+const loveMessages = [
+    "14/2: كل سنة وأنتي معايا.. دي مجرد بداية 💍",
+    "15/2: صباح الخير يا أجمل عيون في الدنيا.. وحشتيني 🌅",
+    "16/2: عارفة إنك أشطر مهندسة هتبنيها الدنيا؟ أنا واثق فيكي 💪",
+    "17/2: بحب الطريقة اللي بتضحكي بيها.. زي الشمس بالظبط ☀️",
+    "18/2: النهاردة أنا فخور بيكي جداً.. عارفه ليه؟ عشان أنتي أنتي 🌸",
+    "19/2: أنتي الأمان اللي دورت عليه عمري كله وملاقيتوش غيرك 🏡",
+    "20/2: وحشني صوتك.. بس مجرد ما بفكر فيكي بحس إنك جنبي 🤍",
+    "21/2: كل يوم بعدي بيكي أكتر من اللي قبله.. ده مش كلام ده حقيقة ❤️",
+    "22/2: أنتي مش بس حبيبتي.. أنتي صديقتي وروحي وراحتي 🌙",
+    "23/2: بفكر فيكي من أول ما بصحى لحد ما بنام.. ومع ذلك بتيجي في حلمي 😊",
+    "24/2: لو الدنيا كلها اتقلبت.. أنا هفضل واقف جنبك 🛡️",
+    "25/2: يوم زي النهاردة بيخليني أشكر ربنا إنك موجودة في حياتي 🤲",
+    "26/2: ضحكتك بترقص قلبي.. حرفياً 💃",
+    "27/2: أنتي أكتر حاجة بخاف عليها في الدنيا دي.. حتى أكتر من نفسي 🥺",
+    "28/2: مش عارف إزاي كنت بعيش قبل ما تيجي في حياتي.. شايف إني كنت ناقص ❤️",
+    "1/3: مارس بدأ.. وأنتي لسه أجمل حاجة في حياتي زي أول يوم 🌷",
+    "2/3: عارف إن أنتي بتحبيني.. بس بقولك عشان حبيت تسمعيها مني بصوت عالي 🗣️❤️",
+    "3/3: النهاردة خليكي تعرفي إن كل حاجة بعملها بفكر فيكي وأنا بعملها 💭",
+    "4/3: ضهرك موجود.. أنا هنا دايماً 💪",
+    "5/3: أنتي تاج راسي يا منوش 👑",
+    "6/3: بتمنى يوم ما تحسي إنك لوحدك.. لأن أنا دايماً معاكي بقلبي 🤍",
+    "7/3: اللي بيحصل بيننا مش طبيعي.. ده حاجة ربنا بيهديها لناس اختارهم 🌟",
+    "8/3: يوم المرأة العالمي.. وأنتي أجمل امرأة في عالمي كله 🌍❤️",
+    "9/3: بحبك بالطريقة دي.. الهادية اللي مش محتاجة ضوضاء عشان تتحس بيها 🕊️",
+    "10/3: كل لحظة معاكي بتتحول لذكرى حلوة في قلبي 📸",
+    "11/3: أنا سعيد بيكي.. بكل معنى الكلمة 😊",
+    "12/3: عمري ما هنساك.. مش لأني مش قادر.. لأني مش عايز 💍",
+    "13/3: أنتي بتخليني أكون نسخة أحسن من نفسي كل يوم 📈",
+    "14/3: شهر على Valentine's.. وأنتي لسه بتملي قلبي زي أول يوم 💕",
+    "15/3: لو لقيتيلك وقت.. قوليلي عن يومك.. بحب أسمع صوتك 🎙️",
+    "16/3: أنتي مش بس حبيبتي.. أنتي أحلى قرار في حياتي ✅",
+    "17/3: النهاردة وكل يوم.. أنا فاكرك ومحتاجك 🧠❤️",
+    "18/3: بحب إنك صريحة معايا.. ده بيخليني أثق فيكي أكتر وأكتر 🔐",
+    "19/3: أنتي الدعاء اللي استجاب له ربنا 🤲✨",
+    "20/3: أول يوم ربيع.. وأنتي ربيعي كل يوم 🌸",
+    "21/3: كل صعبة بتعدي عليا بفكر إنك جنبي وبيهون عليا كل حاجة 💪",
+    "22/3: أنتي ملكة قلبي.. ومش في أوضة تانية 👑",
+    "23/3: شايفك حتى لما مش بشوفك.. ده إيه يعني؟ يعني إنك في قلبي 💓",
+    "24/3: عمل واحد صغير بتعمليه بيسعدني أكتر من أي حاجة تانية 🌟",
+    "25/3: 3 شهور تقريبا على أول يوم.. وأنا كل يوم بحبك أكتر 📅❤️",
+    "26/3: بتمنالك يوم حلو.. ويوم تاني.. وكل الأيام اللي جاية 🌈",
+    "27/3: أنتي أجمل ما حصلني.. وهفضل أقول كده كل يوم 💬",
+    "28/3: لو الوقت وقف.. هيقف وأنا بتفرج عليكي وبتضحكي 😊",
+    "29/3: أنا واثق إننا هنبني حاجة حلوة جداً مع بعض 🏗️💕",
+    "30/3: النهاردة وكل يوم.. بحمد ربنا على نعمة منة 🤲",
+    "31/3: آخر يوم في مارس.. وأنتي لسه أحلى شيء فيه ❤️",
+    "1/4: أبريل جه.. وأنتي أجمل ما فيه 🌷",
+    "2/4: مش بعمل كده عشان لازم.. بعمله عشان بحبك من قلبي 💞",
+    "3/4: عيونك فيهم حاجة.. بتخليني ماقدرش أبعد بصري 👀❤️",
+    "4/4: حتى في أصعب أيامي.. أنتي بتبقي النور اللي بيديني أمل 🕯️",
+    "5/4: بحب إنك موجودة.. بس موجودة 🌸",
+    "6/4: أنتي مش بس حبيبتي.. أنتي أحسن صاحب عندي 👫",
+    "7/4: النهاردة فكرت فيكي أكتر من المعتاد.. وده معتاده كتير أصلاً 😂❤️",
+    "8/4: الدنيا بتبقي أحلى لما تكوني موجودة فيها معايا 🌍",
+    "9/4: كل يوم بيعدي بيزيد إيماني إنك الشخص الصح ✅",
+    "10/4: أنا مش كامل.. بس معاكي بحس إني كامل 💯",
+    "11/4: شكراً إنك بتصبري عليا وبتفهميني 🙏",
+    "12/4: أنتي رزق.. وأنا مش ناوي أضيع الرزق ده أبداً 💍",
+    "13/4: كل خطوة بخطوها بفكر: هل ده هيسعد منة؟ 💭",
+    "14/4: شهرين من Valentine's.. وحبنا لسه بيكبر كل يوم 📈❤️",
+    "15/4: منتص أبريل.. وأنتي لسه في بالي كل دقيقة 🌙",
+    "16/4: لو في حاجة وحشة.. قوليلي.. أنا هنا عشان أشيلها معاكي 💪",
+    "17/4: أنا بحبك بطريقة مش هعرف أوصفها.. بس أنتي حاسة بيها 🤍",
+    "18/4: كل ما بتبتسمي بتاخدي معاكي جزء من قلبي 😊",
+    "19/4: أنتي الشخص اللي لو وصفتوا لحد مش هيصدق إنه موجود 🌟",
+    "20/4: النهاردة وكل يوم.. بشيلك في قلبي وفي دعائي 🤲",
+    "21/4: بحبك بالهدوء ده.. اللي مش محتاج يصرخ عشان يتسمع ❤️",
+    "22/4: أنتي جزء مني.. حرفياً 💞",
+    "23/4: شايفك ناجحة ومتفوقة وسعيدة.. وأنا جنبك 🎓",
+    "24/4: أنا سعيد إنك في حياتي أكتر مما تتخيلي 😊",
+    "25/4: ربع سنة تقريباً علينا.. والأحلى جاي 🎉",
+    "26/4: كل يوم بيعدي بيخليني أعرف إنك الشخص الصح أكتر ✅",
+    "27/4: أنتي بتتعبي في حياتك.. وأنا بشيل معاكي التعب ده 💪",
+    "28/4: بحبك من غير سبب.. ومع ذلك عندي مليون سبب 😂❤️",
+    "29/4: لو سألتيني: إيه أحلى حاجة في حياتك؟ هقولك: أنتي 💍",
+    "30/4: آخر يوم في أبريل.. وأنتي لسه أحلى شيء فيه ❤️",
+    "1/5: مايو بدأ.. وأنتي أحلى ما فيه يا ورد 🌹",
+    "2/5: بحبك بكل طريقة ممكنة.. وطرق تانية مش اخترعوها لسه 💕",
+    "3/5: أنا موجود.. وهفضل موجود.. ده وعد 🤝",
+    "4/5: كل صح في حياتي.. إنتي جزء منه 🌟",
+    "5/5: بسمتك بتضوي يومي.. مش مبالغة دي حقيقة ☀️",
+    "6/5: أنتي بتخليني أحب الحياة أكتر كل يوم 🌸",
+    "7/5: شكراً على كل لحظة بتديني فيها من وقتك 🕐",
+    "8/5: النهاردة بفكر في اللحظة اللي عرفتك فيها وبقول الحمد لله 🤲",
+    "9/5: أنتي مش بس في قلبي.. أنتي في تفكيري وكل خطة بخططها 💭",
+    "10/5: بحبك بالطريقة دي.. الصادقة اللي مش بتتغير ❤️",
+    "11/5: كل يوم بيعدي وأنا أكيد أكتر إنك الشخص الصح 💯",
+    "12/5: أنا مبسوط بيكي.. بكل معنى الكلمة 😊",
+    "13/5: ٣ شهور تقريباً.. وحبنا بيكبر زي الشجرة كل يوم 🌳",
+    "14/5: 3 شهور بالظبط على Valentine's.. وأنتي لسه بتملي قلبي 💕",
+    "15/5: أنتي تاج راسي وعيني.. ومش هنساكي أبداً 👑",
+    "16/5: لو سألتيني: تعيش فين؟ هقولك: جنبك 🏡",
+    "17/5: أنا هنا.. دايماً.. في السهل والصعب 💪",
+    "18/5: أنتي أجمل سر عندي.. والسر ده اسمه: أنا بحبك 🔐",
+    "19/5: كل لحظة عشتها معاكي بتستاهل ألف لحظة من غيرك 💞",
+    "20/5: أنتي في بالي من غير ما أحاول.. ده بيقول إيه؟ 😊",
+    "21/5: بدعيلك في قلبي كل يوم.. ربنا يسعدك 🤲",
+    "22/5: أنا مش كامل.. بس بحاول أبقى أحسن نسخة من نفسي عشانك 📈",
+    "23/5: حبنا مش كلام.. ده إحساس بيتحول لأفعال كل يوم ❤️",
+    "24/5: أنتي غالية عليا.. أكتر مما تتخيلي 💎",
+    "25/5: خمس شهور تقريباً.. والحياة أحلى بيكي كل يوم 🎉",
+    "26/5: بحبك من غير شرط.. ومع ذلك بتعطيني أكتر من اللي بتخيله 💕",
+    "27/5: أنا سعيد.. وأنتي سبب كبير في السعادة دي 😊",
+    "28/5: كل يوم بيعدي وأنا أكيد أكتر إنك هديتي من ربنا 🎁",
+    "29/5: أنا معاكي.. دايماً.. في كل حاجة 💪",
+    "30/5: بحبك بالطريقة دي.. اللي بتزيد ولا بتنقص 📈❤️",
+    "31/5: آخر يوم في مايو.. وأنتي لسه أحلى حاجة فيه 🌹",
+    "1/6: يونيو بدأ.. وأنتي أحلى ما فيه يا قمر 🌙",
+    "2/6: 6 شهور تقريباً على أول يوم.. والحب بيكبر 🌱",
+    "3/6: أنتي بتخليني أحب الصبح عشان ممكن أكلمك 🌅",
+    "4/6: شكراً على وجودك في حياتي.. وشكراً لربنا إنه بعتك 🤲",
+    "5/6: أنا موجود لما تحتاجيني.. وموجود لما ماتحتاجيش 💙",
+    "6/6: بحبك بكل اللي فيا.. وبحمد ربنا إنك موجودة ❤️",
+    "7/6: أنتي مش بس حبيبتي.. أنتي أحسن حاجة حصلت ليا 🌟",
+    "8/6: كل ما بتبصي في عينيا بشوف فيكي حاجة جديدة بحبها 👀",
+    "9/6: أنا سعيد بيكي.. وهسعد بيكي أكتر كل يوم 😊",
+    "10/6: نص السنة تقريباً.. وأنتي لسه بتملي قلبي 💕",
+    "11/6: أنتي الدعاء المستجاب اللي ما توقعتوش 🤲✨",
+    "12/6: كل يوم بيعدي بيثبت إنك الشخص الصح ✅",
+    "13/6: بحبك بطريقة مش هيفهمها غيرنا احنا الاتنين 💞",
+    "14/6: 4 شهور على Valentine's.. ❤️",
+    "15/6: نص يونيو.. وأنا لسه بفكر فيكي زي أول يوم 💭",
+    "16/6: أنتي تاج راسي وعيني يا منوش 👑❤️",
+    "17/6: بدعيلك بالنجاح والسعادة.. وبدعيلنا ببعض 🤲",
+    "18/6: أنا واثق في حبنا.. وواثق فيكي 💪",
+    "19/6: أنتي غالية عليا.. وهتفضلي غالية 💎",
+    "20/6: كل خطوة بخطوها بفكر: هتسعد منة؟ ❤️",
+    "21/6: أطول يوم في السنة.. وأنتي بتملي كل دقيقة فيه 🌞",
+    "22/6: أنا بحبك.. ده مش بس كلام.. ده وعد بيتجدد كل يوم 💍",
+    "23/6: أنتي جزء من حياتي.. مش حاجة زيادة.. حاجة أساسية 🏡",
+    "24/6: شكراً على صبرك عليا.. أنا عارف إني مش سهل 😂❤️",
+    "25/6: 6 شهور بالظبط على أول يوم! 🎉❤️ وأنا بحبك أكتر!",
+    "26/6: بحبك بكل طريقة ممكنة وطرق لسه هنكتشفها 💕",
+    "27/6: أنتي بتديني طاقة من غير ما تعرفي 🔋",
+    "28/6: أنا معاكي.. في السهل والصعب.. في البعيد والقريب 💙",
+    "29/6: كل يوم بيعدي وأنا أكيد أكتر إنك الشخص الصح لي 💯",
+    "30/6: آخر يوم في يونيو.. وأنتي لسه أحلى حاجة فيه ❤️",
+    "1/7: يوليو بدأ.. وأنتي أحلى ما فيه يا شمس ☀️",
+    "2/7: بحبك من الصبح لحد الليل.. ومن الليل لحد الصبح 🌙",
+    "3/7: أنتي ملكة قلبي.. وملكة تاني مش في القصة 👑",
+    "4/7: أنا مبسوط إنك موجودة في حياتي.. أكتر ما تتخيلي 😊",
+    "5/7: كل ما الوقت يعدي بيزيد إيماني إنك هديتي من ربنا 🎁",
+    "6/7: أنتي بتخليني أحب الحياة بشكل تاني خالص 🌸",
+    "7/7: بدعيلك كل يوم.. ربنا يسعدك ويحقق أحلامك 🤲",
+    "8/7: أنا موجود.. دايماً.. في أي وقت محتاجيني فيه 💪",
+    "9/7: بحبك بالهدوء ده.. اللي بيدفي من جوا ❤️",
+    "10/7: قريباً نكمل ٧ شهور.. والحب بيكبر كل يوم 🌳",
+    "11/7: أنتي تاج راسي يا منوش.. ومش هغير الكلام ده أبداً 👑",
+    "12/7: بفكر فيكي في كل وقت.. حتى لما باكون مشغول جداً 💭",
+    "13/7: أنا سعيد بيكي.. وهسعد بيكي أكتر وأكتر ❤️",
+    "14/7: 5 شهور على Valentine's.. وحبنا بيكبر 📈",
+    "15/7: نص يوليو.. وأنا لسه بحبك بنفس الطريقة وأكتر 💕",
+    "16/7: أنتي الشخص اللي لو وصفتوا لحد مش هيصدق إنه موجود 🌟",
+    "17/7: كل خطوة بخطوها بفكر: أنتي هتكوني جنبي فيها؟ 💍",
+    "18/7: أنا بحبك بكل اللي فيا.. وبحمد ربنا على كده 🤲",
+    "19/7: أنتي بتديني قوة من غير ما تعرفي 💪",
+    "20/7: بحبك من غير سبب.. ومع ذلك عندي آلاف الأسباب 😂❤️",
+    "21/7: أنتي جزء مني.. وأنا جزء منك.. ده مش مبالغة ده حقيقة 💞",
+    "22/7: شكراً على كل حاجة بتعمليها.. الصغيرة والكبيرة 🙏",
+    "23/7: أنا واثق إننا هنبني مستقبل حلو جداً مع بعض 🏡",
+    "24/7: بدعيلك بالسعادة والنجاح.. وبدعيلنا نفضل مع بعض 🤲",
+    "25/7: 7 شهور تقريباً! وأنا بحبك أكتر من أول يوم 🎉❤️",
+    "26/7: أنتي بتخليني أشوف الدنيا بعيون مختلفة 🌍",
+    "27/7: كل يوم بيعدي وأنا أكيد أكتر إنك هديتي من ربنا 🎁",
+    "28/7: أنا معاكي.. دايماً.. في كل حاجة ❤️",
+    "29/7: بحبك بالطريقة دي.. الصادقة المستمرة 💕",
+    "30/7: كل ما بشوفك بحس إني في أحسن يوم في حياتي 😊",
+    "31/7: آخر يوم في يوليو.. وأنتي لسه أحلى حاجة فيه ❤️",
+    "1/8: أغسطس بدأ.. وأنتي أحلى ما فيه يا قمر 🌙",
+    "2/8: بحبك بكل طريقة ممكنة.. وهحبك بطرق لسه ما اكتشفناهاش 💕",
+    "3/8: أنا سعيد بيكي أكتر مما تتخيلي 😊",
+    "4/8: ٨ شهور تقريباً.. وحبنا بيكبر زي الشجرة 🌳",
+    "5/8: أنتي تاج راسي يا منوش 👑❤️",
+    "6/8: بفكر فيكي.. وبفكر في مستقبلنا.. وبحس بالأمل 🌈",
+    "7/8: أنا موجود.. دايماً.. في أي وقت محتاجيني 💪",
+    "8/8: بحبك بهدوء.. ده مش ضعف.. ده قوة ❤️",
+    "9/8: أنتي بتديني طاقة تكملة اليوم حتى في أصعب الأوقات 🔋",
+    "10/8: شكراً على وجودك في حياتي 🙏",
+    "11/8: كل يوم بيعدي وأنا أكيد أكتر إنك الشخص الصح ✅",
+    "12/8: أنتي بتخليني أحب الحياة أكتر كل يوم 🌸",
+    "13/8: بدعيلك بالسعادة والنجاح دايماً 🤲",
+    "14/8: 6 شهور على Valentine's 💕 وأنا بحبك أكتر!",
+    "15/8: نص أغسطس.. وأنا لسه بحبك بنفس الطريقة وأكتر 💞",
+    "16/8: أنتي الشخص اللي بيخليني أبقى أحسن نسخة من نفسي 📈",
+    "17/8: كل خطوة بخطوها بفكر فيكي يا منوش 💭",
+    "18/8: أنا بحبك من قلبي.. مش كلام.. ده إحساس حقيقي ❤️",
+    "19/8: أنتي غالية عليا.. أكتر ما تتخيلي 💎",
+    "20/8: بحبك بالطريقة دي.. المستمرة اللي مش بتوقف 💕",
+    "21/8: أنا واثق فيكي.. وواثق في حبنا 💪",
+    "22/8: أنتي جزء مني.. وأنا مش هتخيل حياتي من غيرك 🏡",
+    "23/8: شكراً على كل حاجة بتديهالي 🙏❤️",
+    "24/8: ٩ شهور تقريباً! وأنا بحبك أكتر من أول يوم 🎉",
+    "25/8: كل ما الوقت يعدي بيزيد حبي ليكي 📈❤️",
+    "26/8: أنا معاكي.. دايماً.. في السهل والصعب 💙",
+    "27/8: بحبك بكل اللي فيا.. وأكتر 💕",
+    "28/8: أنتي بتخليني أشوف الجمال في كل حاجة 🌍",
+    "29/8: بدعيلك كل يوم.. ربنا يسعدك 🤲",
+    "30/8: كل يوم بيعدي وأنا أكيد أكتر إنك هديتي من ربنا 🎁",
+    "31/8: آخر يوم في أغسطس.. وأنتي لسه أحلى حاجة فيه ❤️",
+    "1/9: سبتمبر بدأ.. وأنتي أحلى ما فيه 🌷",
+    "2/9: قريبين من ١٠ شهور! والحب بيكبر كل يوم 🌳",
+    "3/9: أنا سعيد بيكي.. وهسعد بيكي أكتر 😊",
+    "4/9: بحبك بهدوء وبعمق.. زي البحر 🌊",
+    "5/9: أنتي تاج راسي يا منوش 👑",
+    "6/9: كل ما بتبتسمي بياخد قلبي معاكي 😊❤️",
+    "7/9: أنا موجود.. دايماً.. لما تحتاجيني 💪",
+    "8/9: بحبك من غير سبب.. ومع ذلك عندي آلاف الأسباب 😂💕",
+    "9/9: أنتي الشخص اللي بيخليني أحب يومي 🌅",
+    "10/9: ٩ شهور تقريباً.. والحب بيكبر 🌱",
+    "11/9: بفكر فيكي.. وبتمنالك كل الخير 💭🤲",
+    "12/9: أنتي بتخليني أحس بالأمان والراحة 🏡",
+    "13/9: بحبك بالطريقة دي.. الصادقة المستمرة ❤️",
+    "14/9: 7 شهور على Valentine's 💕",
+    "15/9: نص سبتمبر.. وأنا لسه بحبك زي أول يوم وأكتر 💞",
+    "16/9: أنتي الدعاء المستجاب اللي فاجأني ربنا بيه 🤲✨",
+    "17/9: كل يوم بيعدي وأنا أكيد أكتر إنك الشخص الصح ✅",
+    "18/9: أنا بحبك.. وهفضل بحبك.. ده مش وعد ده قرار 💍",
+    "19/9: أنتي بتديني قوة من غير ما تعرفي 💪",
+    "20/9: بحبك بكل طريقة ممكنة 💕",
+    "21/9: أنا واثق فيكي.. وواثق في مستقبلنا 🌟",
+    "22/9: شكراً على كل حاجة يا منوش 🙏❤️",
+    "23/9: أنتي غالية عليا.. دايماً 💎",
+    "24/9: ١٠ شهور تقريباً! 🎉 وأنا بحبك أكتر من أول يوم!",
+    "25/9: ٩ شهور بالظبط على أول يوم ❤️🎊",
+    "26/9: أنا معاكي.. دايماً 💙",
+    "27/9: بحبك بالهدوء ده اللي بيدفي من جوا ❤️",
+    "28/9: كل يوم بيعدي وأنا أكيد أكتر إنك هديتي 🎁",
+    "29/9: أنتي بتخليني أشوف الدنيا بعيون مليانة أمل 🌈",
+    "30/9: آخر يوم في سبتمبر.. وأنتي لسه أحلى حاجة فيه ❤️",
+    "1/10: أكتوبر بدأ.. وأنتي أحلى ما فيه 🍂",
+    "2/10: ١٠ شهور تقريباً.. والحب بيكبر زي الشجرة 🌳",
+    "3/10: أنا سعيد بيكي أكتر مما تتخيلي 😊",
+    "4/10: بحبك بعمق.. زي الجذور تحت الأرض 🌱",
+    "5/10: أنتي تاج راسي يا منوش 👑❤️",
+    "6/10: كل ما بشوفك بتضحكي بنسى همومي كلها 😊",
+    "7/10: أنا موجود.. دايماً 💪",
+    "8/10: بحبك بكل اللي فيا 💕",
+    "9/10: أنتي بتخليني أحب الحياة أكتر ❤️",
+    "10/10: ١٠/١٠.. يوم مميز.. وأنتي الأميز فيه 💞",
+    "11/10: بفكر فيكي دايماً يا منوش 💭",
+    "12/10: أنتي الشخص اللي بيخليني أبقى أحسن نسخة من نفسي 📈",
+    "13/10: بدعيلك بالسعادة والنجاح دايماً 🤲",
+    "14/10: 8 شهور على Valentine's 💕 والحب في ازدياد!",
+    "15/10: نص أكتوبر.. وأنا لسه بحبك زي أول يوم 💞",
+    "16/10: أنا بحبك.. وهفضل بحبك 💍",
+    "17/10: أنتي بتديني طاقة وأمل كل يوم 🔋🌈",
+    "18/10: شكراً على وجودك يا منوش 🙏❤️",
+    "19/10: كل يوم بيعدي وأنا أكيد أكتر إنك الشخص الصح ✅",
+    "20/10: بحبك بهدوء وبعمق ❤️",
+    "21/10: أنتي غالية عليا.. دايماً وأبداً 💎",
+    "22/10: أنا واثق في حبنا ومستقبلنا 💪🌟",
+    "23/10: بحبك من غير سبب.. ومع ذلك عندي مليون سبب 😂💕",
+    "24/10: قريبين من ١١ شهر! والأحلى جاي 🎉",
+    "25/10: ١٠ شهور بالظبط على أول يوم! 🎊❤️",
+    "26/10: أنا معاكي دايماً يا منوش 💙",
+    "27/10: بحبك بالطريقة دي.. المستمرة اللي مش بتوقف 💕",
+    "28/10: أنتي بتخليني أشوف الجمال في كل حاجة 🌍",
+    "29/10: بدعيلك كل يوم.. ربنا يسعدك ويحقق أحلامك 🤲",
+    "30/10: كل يوم بيعدي وأنا أكيد أكتر إنك هديتي من ربنا 🎁",
+    "31/10: آخر يوم في أكتوبر.. وأنتي لسه أحلى حاجة فيه ❤️",
+    "1/11: نوفمبر بدأ.. وأنتي أحلى ما فيه 🍂",
+    "2/11: ١١ شهر تقريباً.. والحب بيكبر كل يوم 🌳",
+    "3/11: أنا سعيد بيكي.. وهسعد بيكي أكتر 😊",
+    "4/11: بحبك بكل طريقة ممكنة 💕",
+    "5/11: أنتي تاج راسي يا منوش 👑",
+    "6/11: كل ما بفكر فيكي بتبسم من غير ما أحس 😊❤️",
+    "7/11: أنا موجود.. دايماً.. في أي وقت محتاجيني 💪",
+    "8/11: بحبك بهدوء وبعمق.. زي البحر 🌊",
+    "9/11: أنتي بتخليني أحس بالأمل دايماً 🌈",
+    "10/11: قريبين جداً من سنة كاملة! 🎉",
+    "11/11: عيد ميلادك يا أغلى حاجة! 🎂🎊❤️ كل سنة وأنتي في حياتي وتاج راسي! دي مش بس رسالة.. دي دعوة من قلبي إنك تفضلي معايا كل الأعياد الجاية 💍",
+    "12/11: أول يوم بعد عيدك.. وأنا لسه سعيد بيكي وبيوم أمبارح 🎂❤️",
+    "13/11: ١١ شهر تقريباً! والأحلى جاي إن شاء الله 🌟",
+    "14/11: 9 شهور على Valentine's 💕",
+    "15/11: نص نوفمبر.. وأنا لسه بحبك زي أول يوم 💞",
+    "16/11: أنتي الدعاء المستجاب يا منوش 🤲✨",
+    "17/11: كل يوم بيعدي وأنا أكيد أكتر إنك الشخص الصح ✅",
+    "18/11: أنا بحبك.. وهفضل بحبك.. ده قرار مش بيتغير 💍",
+    "19/11: أنتي بتديني قوة من غير ما تعرفي 💪",
+    "20/11: بحبك بكل اللي فيا 💕❤️",
+    "21/11: أنا واثق فيكي وفي حبنا 🌟",
+    "22/11: شكراً على كل حاجة يا منوش 🙏",
+    "23/11: أنتي غالية عليا دايماً 💎",
+    "24/11: قريبين من السنة الأولى! 🎊",
+    "25/11: ١١ شهر بالظبط على أول يوم ❤️",
+    "26/11: أنا معاكي دايماً يا منوش 💙",
+    "27/11: بحبك بالطريقة دي.. الصادقة المستمرة 💕",
+    "28/11: كل يوم بيعدي وأنا أكيد أكتر إنك هديتي 🎁",
+    "29/11: أنتي بتخليني أشوف الدنيا بعيون مليانة أمل 🌈",
+    "30/11: آخر يوم في نوفمبر.. والقلب مليان بيكي ❤️",
+    "1/12: ديسمبر بدأ.. وأنتي أحلى ما فيه ❄️",
+    "2/12: ١٢ شهر تقريباً.. سنة كاملة من الحب 🎉",
+    "3/12: أنا سعيد بيكي.. أكتر ما تتخيلي 😊",
+    "4/12: بحبك بكل طريقة ممكنة 💕",
+    "5/12: أنتي تاج راسي يا منوش 👑❤️",
+    "6/12: كل يوم بيعدي وأنا بحبك أكتر 📈",
+    "7/12: أنا موجود.. دايماً 💪",
+    "8/12: بحبك بهدوء وبعمق ❤️",
+    "9/12: قريبين جداً من سنة! ❤️🎊",
+    "10/12: 10 شهور على Valentine's 💕",
+    "11/12: أنتي بتخليني أحس بالأمان 🏡",
+    "12/12: يوم ١٢/١٢.. مميز زيك 💞",
+    "13/12: بفكر فيكي دايماً يا منوش 💭❤️",
+    "14/12: 10 شهور على Valentine's 🎉",
+    "15/12: نص ديسمبر.. وقلبي مليان بيكي 💕",
+    "16/12: أنتي الدعاء المستجاب يا منوش 🤲",
+    "17/12: كل يوم بيعدي وأنا أكيد أكتر إنك الشخص الصح ✅",
+    "18/12: أنا بحبك.. وهفضل بحبك 💍",
+    "19/12: أنتي بتديني قوة وأمل 💪🌈",
+    "20/12: بحبك بكل اللي فيا 💕",
+    "21/12: أنا واثق في حبنا ومستقبلنا 🌟",
+    "22/12: شكراً على كل حاجة يا منوش 🙏❤️",
+    "23/12: أنتي غالية عليا دايماً 💎",
+    "24/12: كريسماس إيف.. وأنتي هديتي الأحلى 🎁❤️",
+    "25/12: 🎉 سنة كاملة على أول يوم!!! 🎊❤️💍 أنا بحبك يا منوش من قلبي.. وهحبك طول عمري. شكراً على أجمل سنة في حياتي!",
+    "26/12: اليوم اللي بعد الذكرى السنوية.. وحبنا بيبدأ سنة تانية 🌱",
+    "27/12: أنا معاكي دايماً يا منوش 💙❤️",
+    "28/12: بحبك بالطريقة دي.. المستمرة اللي مش بتوقف 💕",
+    "29/12: كل يوم بيعدي وأنا بحبك أكتر 📈❤️",
+    "30/12: قبل آخر يوم في السنة.. وأنتي أحلى ما فيها ❤️",
+    "31/12: آخر يوم في السنة.. والسنة الجاية هتكون أحلى معاكي 🎊💍",
+    "1/1: سنة جديدة.. وأنتي أحلى ما فيها 🎉❤️",
+    "2/1: يناير بدأ.. وأنتي لسه أحلى حاجة في حياتي 💕",
+    "3/1: بحبك بكل طريقة ممكنة وطرق لسه هنكتشفها 💞",
+    "4/1: أنا سعيد بيكي دايماً 😊",
+    "5/1: أنتي تاج راسي يا منوش 👑",
+    "6/1: بفكر فيكي من الصبح لحد الليل 💭❤️",
+    "7/1: أنا موجود.. دايماً.. في أي وقت 💪",
+    "8/1: بحبك بهدوء وبعمق وبصدق ❤️",
+    "9/1: أنتي بتخليني أحس بالأمل دايماً 🌈",
+    "10/1: ١٣ شهر تقريباً.. والحب بيكبر 🌳",
+    "11/1: كل يوم بيعدي وأنا بحبك أكتر من اللي قبله 📈",
+    "12/1: أنتي الشخص اللي بيخليني أبقى أحسن نسخة من نفسي 🌟",
+    "13/1: بدعيلك بالسعادة والنجاح دايماً 🤲",
+    "14/1: شهر على Valentine's الجاي.. وقلبي مليان بيكي 💕",
+    "15/1: نص يناير.. وأنا لسه بحبك زي أول يوم وأكتر 💞",
+    "16/1: أنا بحبك.. وهفضل بحبك.. ده مش وعد ده حقيقة 💍",
+    "17/1: أنتي بتديني طاقة من غير ما تعرفي 🔋",
+    "18/1: شكراً على وجودك في حياتي يا منوش 🙏❤️",
+    "19/1: كل يوم بيعدي وأنا أكيد أكتر إنك الشخص الصح ✅",
+    "20/1: بحبك بالطريقة دي.. الصادقة المستمرة 💕",
+    "21/1: أنا واثق فيكي وفي حبنا 💪🌟",
+    "22/1: أنتي غالية عليا دايماً وأبداً 💎",
+    "23/1: بحبك من غير سبب.. ومع ذلك عندي آلاف الأسباب 😂❤️",
+    "24/1: قريبين من Valentine's الثاني! 🎉",
+    "25/1: ١٣ شهر بالظبط على أول يوم! ❤️",
+    "26/1: أنا معاكي دايماً يا منوش 💙",
+    "27/1: بحبك بكل اللي فيا 💕",
+    "28/1: أنتي بتخليني أشوف الدنيا بعيون مليانة حب 🌍❤️",
+    "29/1: بدعيلك كل يوم.. ربنا يسعدك 🤲",
+    "30/1: كل يوم بيعدي وأنا بحبك أكتر 📈",
+    "31/1: آخر يوم في يناير.. وقلبي مليان بيكي ❤️",
+    "1/2: فبراير بدأ.. وحبي ليكي كمل سنة وزيادة 💕",
+    "2/2: أسبوعين على Valentine's الثاني.. وأنا بستعد عشانك 🎁",
+    "3/2: بحبك بكل طريقة ممكنة 💞",
+    "4/2: ١٠ أيام على Valentine's! وقلبي بيخبط بسرعة 💓",
+    "5/2: بفكر فيكي وفي مفاجأتك 💭❤️",
+    "6/2: أنا موجود.. دايماً.. في كل حاجة 💪",
+    "7/2: بحبك بهدوء وبعمق وبصدق ❤️",
+    "8/2: أنتي الشخص اللي بيخليني أحب كل يوم جديد 🌅",
+    "9/2: أسبوع على Valentine's! استعدي 🎉",
+    "10/2: بحبك يا منوش من قلبي 💕",
+    "11/2: ٣ أيام على Valentine's! 🎊",
+    "12/2: بكره بكره بكره! 🎁❤️",
+    "13/2: Valentine's غداً.. وأنتي هديتي الأجمل 💍",
+    "14/2: ❤️ Happy Valentine's Day يا منوووش! ❤️ كل سنة وأنتي في حياتي وتاج راسي! حبنا كمل سنة والأحلى جاي! بحبك يا منووووووووووش 💍🎊"
+];
+
+function initDailyMessages() {
+    const container = document.getElementById('days-container');
+    const now = new Date();
+    const diffTime = now - startDateConfig;
+    const daysPassed = Math.floor(diffTime / (1000*60*60*24));
+    container.innerHTML = '';
+    for (let i = 0; i < 365; i++) {
+        const dayDiv = document.createElement('div');
+        dayDiv.classList.add('day-box');
+        if (i <= daysPassed) {
+            dayDiv.classList.add('unlocked');
+            dayDiv.innerHTML = `<span>Day</span><span>${i+1}</span><i class="fas fa-lock-open" style="font-size:10px;margin-top:5px;"></i>`;
+            dayDiv.onclick = () => {
+                const msg = loveMessages[i] || `رسالة يوم ${i+1}.. من قلبي ليكي ❤️`;
+                alert(`💌 رسالة اليوم (${i+1}):\n\n"${msg}"`);
+            };
+        } else {
+            dayDiv.classList.add('locked');
+            dayDiv.innerHTML = `<span>Day</span><span>${i+1}</span><i class="fas fa-lock" style="font-size:10px;margin-top:5px;"></i>`;
+            dayDiv.onclick = () => {
+                const unlockDate = new Date(startDateConfig);
+                unlockDate.setDate(startDateConfig.getDate() + i);
+                alert(`⛔ لسه بدري يا جميل!\nالرسالة دي هتتفتح يوم: ${unlockDate.toLocaleDateString('ar-EG')}`);
+            };
         }
+        container.appendChild(dayDiv);
+    }
+    if (daysPassed >= 365) document.getElementById('forever-div').style.display = 'block';
+}
 
-        // --- 7. نظام 365 رسالة ---
-        const startDateConfig = new Date("February 14, 2026 00:00:00"); 
-        const loveMessages = [
-            "14/2: كل سنة وأنتي معايا.. دي مجرد بداية 💍",
-            "15/2: صباح الخير يا أجمل عيون.. وحشتيني",
-            "16/2: عارفة إنك أشطر مهندسة في الدنيا؟",
-            "17/2: بحب الطريقة اللي بتضحكي بيها",
-            "18/2: النهاردة أنا فخور بيكي جداً",
-            "19/2: أنتي الأمان اللي دورت عليه عمري كله",
-            "20/2: وحشني صوتك.. كلميني",
-            // ضيف رسايل هنا براحتك
-        ];
+// ==========================================
+// 12. سينما مود
+// ==========================================
+const cinemaOverlay = document.getElementById('cinema-overlay');
+const voiceAudio = document.getElementById('special-song');
 
-        function initDailyMessages() {
-            const container = document.getElementById('days-container');
-            const now = new Date();
-            const diffTime = now - startDateConfig;
-            const daysPassed = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-            container.innerHTML = '';
-
-            for (let i = 0; i < 365; i++) {
-                const dayDiv = document.createElement('div');
-                dayDiv.classList.add('day-box');
-                if (i <= daysPassed) {
-                    dayDiv.classList.add('unlocked');
-                    dayDiv.innerHTML = `<span>Day</span><span>${i+1}</span><i class="fas fa-lock-open" style="font-size:10px; margin-top:5px;"></i>`;
-                    dayDiv.onclick = () => {
-                        const msgContent = loveMessages[i] ? loveMessages[i] : `رسالة يوم ${i+1}.. (لسه أشرف بيكتبها من قلبه 😉)`;
-                        alert(`💌 رسالة اليوم (${i+1}):\n\n"${msgContent}"`);
-                    };
-                } else {
-                    dayDiv.classList.add('locked');
-                    dayDiv.innerHTML = `<span>Day</span><span>${i+1}</span><i class="fas fa-lock" style="font-size:10px; margin-top:5px;"></i>`;
-                    dayDiv.onclick = () => {
-                        const unlockDate = new Date(startDateConfig);
-                        unlockDate.setDate(startDateConfig.getDate() + i);
-                        alert(`⛔ لسه بدري يا جميل!\nالذكري دي هتتكتب يوم: ${unlockDate.toLocaleDateString('ar-EG')}`);
-                    };
-                }
-                container.appendChild(dayDiv);
-            }
-            if (daysPassed >= 365) document.getElementById('forever-div').style.display = 'block';
-        }
-        initDailyMessages();
-
-        // --- 8. سينما مود (الصوت) ---
-        const cinemaOverlay = document.getElementById('cinema-overlay');
-        const voiceAudio = document.getElementById('special-song');
-
-        function openCinemaMode() {
-            if(music) music.pause(); // وقف الموسيقى الخلفية
-            cinemaOverlay.style.display = 'flex';
-            setTimeout(() => cinemaOverlay.style.opacity = '1', 10);
-            voiceAudio.play().catch(e => alert("اضغطي ع الشاشة عشان الصوت يشتغل"));
-        }
-
-        function closeCinemaMode() {
-            cinemaOverlay.style.opacity = '0';
-            setTimeout(() => {
-                cinemaOverlay.style.display = 'none';
-                voiceAudio.pause();
-                voiceAudio.currentTime = 0;
-                if(music) music.play(); // شغل الموسيقى الخلفية تاني
-            }, 1000);
-        }
-    </script>
+function openCinemaMode() {
+    if (music) music.pause();
+    cinemaOverlay.style.display = 'flex';
+    setTimeout(() => cinemaOverlay.style.opacity = '1', 10);
+    voiceAudio.play().catch(() => alert("اضغطي ع الشاشة عشان الصوت يشتغل"));
+}
+function closeCinemaMode() {
+    cinemaOverlay.style.opacity = '0';
+    setTimeout(() => {
+        cinemaOverlay.style.display = 'none';
+        voiceAudio.pause(); voiceAudio.currentTime = 0;
+        if (music) music.play();
+    }, 1000);
+}
+</script>
 </body>
 </html>
